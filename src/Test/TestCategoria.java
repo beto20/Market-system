@@ -1,7 +1,7 @@
 
 package Test;
 
-import Beans.Categoria;
+import Model.Categoria;
 import DAO.CategoriaDAOImpl;
 import java.util.ArrayList;
 import java.util.List;

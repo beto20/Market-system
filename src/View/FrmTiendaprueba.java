@@ -2,7 +2,7 @@
 package View;
 
 import DAO.CategoriaDAOImpl;
-import Beans.Categoria;
+import Model.Categoria;
 import DAO.Conexion;
 import java.util.List;
 import javax.swing.event.TableModelListener;

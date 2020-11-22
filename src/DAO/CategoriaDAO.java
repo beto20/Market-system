@@ -1,9 +1,9 @@
 
 package DAO;
 
-import Service.CRUDService;
+import Service.CategoriaService;
 
 
-public interface CategoriaDAO extends CRUDService{
+public interface CategoriaDAO extends CategoriaService{
     
 }

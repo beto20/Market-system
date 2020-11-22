@@ -1,7 +1,7 @@
 
 package View;
 
-import Beans.Categoria;
+import Model.Categoria;
 import DAO.CategoriaDAOImpl;
 import java.util.List;
 import javax.swing.JOptionPane;

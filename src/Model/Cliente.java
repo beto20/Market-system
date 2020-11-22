@@ -1,5 +1,5 @@
  
-package Beans;
+package Model;
 
  
 public class Cliente {
@@ -77,6 +77,13 @@ public class Cliente {
     public void setEstado(String estado){
         this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", correo=" + correo + ", dni=" + dni + ", direccion=" + direccion + ", estado=" + estado + '}';
+    }
+    
+    
     
     
 }

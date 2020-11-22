@@ -1,7 +1,7 @@
  
 package DAO;
 
-import Beans.Categoria;
+import Model.Categoria;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -134,6 +134,7 @@ public class CategoriaDAOImpl implements CategoriaDAO{
             System.err.println("Error de borrado fisico: "+e.getMessage());
         }
     }
+
 
     
     
