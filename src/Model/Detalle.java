@@ -7,13 +7,13 @@ public class Detalle {
     private int id_producto;
     private int id_factura;
     private int cantidad;
-    private int precio;
+    private double precio;
     private String estado;
 
     public Detalle() {
     }
 
-    public Detalle(int id_producto, int id_factura, int cantidad, int precio, String estado) {
+    public Detalle(int id_producto, int id_factura, int cantidad, double precio, String estado) {
         this.id_producto = id_producto;
         this.id_factura = id_factura;
         this.cantidad = cantidad;
@@ -53,11 +53,11 @@ public class Detalle {
         this.cantidad = cantidad;
     }
 
-    public int getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(int precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 
@@ -68,9 +68,9 @@ public class Detalle {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
-    
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Detalle{" + "id=" + id + ", id_producto=" + id_producto + ", id_factura=" + id_factura + ", cantidad=" + cantidad + ", precio=" + precio + ", estado=" + estado + '}';
+    }
 }

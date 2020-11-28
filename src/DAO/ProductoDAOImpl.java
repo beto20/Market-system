@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JComboBox;
 
 public class ProductoDAOImpl implements ProductoDAO {
 
@@ -23,6 +24,46 @@ public class ProductoDAOImpl implements ProductoDAO {
     public ProductoDAOImpl(Producto p) {
         this.p = p;
     }
+    
+    public void consultarCategorias(JComboBox cmbCat){
+        sql = "select nombre from categoria where estado='Activo'";
+        try {
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            cmbCat.addItem("Seleccione una categoria");
+            while (rs.next()) {                
+                cmbCat.addItem(rs.getString("nombre"));
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Error "+e.getMessage());
+        }
+    }
+    
+    public Producto listaProductoId(int id){
+         sql = "Select * from producto where id = ? and estado = 'Activo'";
+        
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                p.setId(rs.getInt("id"));
+                p.setNombre(rs.getString("nombre"));
+                p.setPrecio(rs.getDouble("precio"));
+                p.setStock(rs.getInt("stock"));
+                return p;
+            }else{
+                return null;
+            }
+            
+            
+        } catch (SQLException e) {
+            System.err.println("Error al buscar producto "+e.getMessage());
+            return null;
+        }
+    }
+    
     
     @Override
     public List<Producto> listarProducto(String categoria) {
@@ -80,7 +121,7 @@ public class ProductoDAOImpl implements ProductoDAO {
             ps.setString(1, nombre);
             ps.setDouble(2, precio);
             ps.setInt(3, stock);
-            ps.executeQuery();
+            ps.executeUpdate();
             return true;
         } catch (SQLException e) {
             System.err.println("Error al actualizar producto "+e.getMessage());

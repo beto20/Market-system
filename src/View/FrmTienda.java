@@ -31,7 +31,8 @@ public class FrmTienda extends javax.swing.JFrame {
         jmClientes = new javax.swing.JMenuItem();
         jmSalir = new javax.swing.JMenu();
         jmOpciones = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jmenuModoPago = new javax.swing.JMenuItem();
+        jmenuSalir = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,13 +105,21 @@ public class FrmTienda extends javax.swing.JFrame {
         });
         jmSalir.add(jmOpciones);
 
-        jMenuItem3.setText("Salir");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jmenuModoPago.setText("Ver modos de pago");
+        jmenuModoPago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jmenuModoPagoActionPerformed(evt);
             }
         });
-        jmSalir.add(jMenuItem3);
+        jmSalir.add(jmenuModoPago);
+
+        jmenuSalir.setText("Salir");
+        jmenuSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmenuSalirActionPerformed(evt);
+            }
+        });
+        jmSalir.add(jmenuSalir);
 
         jMenuBar1.add(jmSalir);
 
@@ -135,9 +144,10 @@ public class FrmTienda extends javax.swing.JFrame {
         Centrar(cif);
     }//GEN-LAST:event_jmCategoriasActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    private void jmenuModoPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuModoPagoActionPerformed
+        ModoPagoInternalFrm mpif = new ModoPagoInternalFrm();
+        Centrar(mpif);
+    }//GEN-LAST:event_jmenuModoPagoActionPerformed
     //Metodo void para centrar los JInternalFrame
     public void Centrar(JInternalFrame jiframe){
         VentanaPrincipal.add(jiframe);
@@ -169,6 +179,10 @@ public class FrmTienda extends javax.swing.JFrame {
         OpcionesInternalFrm oif = new OpcionesInternalFrm();
         Centrar(oif);
     }//GEN-LAST:event_jmOpcionesActionPerformed
+
+    private void jmenuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jmenuSalirActionPerformed
 
 
     /**
@@ -212,13 +226,14 @@ public class FrmTienda extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jmCategorias;
     private javax.swing.JMenuItem jmClientes;
     private javax.swing.JMenuItem jmOpciones;
     private javax.swing.JMenu jmProductos;
     private javax.swing.JMenu jmSalir;
     private javax.swing.JMenuItem jmVentas;
+    private javax.swing.JMenuItem jmenuModoPago;
+    private javax.swing.JMenuItem jmenuSalir;
     private javax.swing.JMenuItem jmproductos;
     // End of variables declaration//GEN-END:variables
 }

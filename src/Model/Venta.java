@@ -2,23 +2,25 @@
 package Model;
 
 
-public class Factura {
+public class Venta {
     private int id;
     private int id_cliente;
     private int id_modo_pago;
+    private double monto;
     private String fecha;
     private String estado;
 
-    public Factura() {
+    public Venta() {
     }
 
-    public Factura(int id_cliente, int id_modo_pago, String fecha, String estado) {
+    public Venta(int id_cliente, int id_modo_pago, double monto, String fecha, String estado) {
         this.id_cliente = id_cliente;
         this.id_modo_pago = id_modo_pago;
+        this.monto = monto;
         this.fecha = fecha;
         this.estado = estado;
     }
-
+    
     public int getId() {
         return id;
     }
@@ -59,7 +61,16 @@ public class Factura {
         this.estado = estado;
     }
 
-    
+    public double getMonto() {
+        return monto;
+    }
 
-    
+    public void setMonto(double monto) {
+        this.monto = monto;
+    }
+
+    @Override
+    public String toString() {
+        return "Venta{" + "id=" + id + ", id_cliente=" + id_cliente + ", id_modo_pago=" + id_modo_pago + ", monto=" + monto + ", fecha=" + fecha + ", estado=" + estado + '}';
+    }
 }
