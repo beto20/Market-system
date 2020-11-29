@@ -26,6 +26,7 @@ public class VentaDAOImpl implements VentaDAO{
         this.v = v;
     }
     
+    
     public void metodosPago(JComboBox cmbModoPago){
         sql = "select nombre from modo_pago where estado='Activo'";
         try {

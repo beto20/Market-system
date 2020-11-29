@@ -20,10 +20,27 @@ public class ProductoDAOImpl implements ProductoDAO {
     Connection connection = conexion.conexion();
     List<Producto> lista = new ArrayList<>();
     
+    int r;
 
     public ProductoDAOImpl(Producto p) {
         this.p = p;
     }
+    
+    public int actualizarStock(int cantidad, int idproducto){
+        
+        sql = "update producto set stock = ? where id = ? and estado = 'Activo'";
+        try {
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, cantidad);
+            ps.setInt(2, idproducto);
+            ps.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.err.println("Error al calcular stock "+e.getMessage());
+        }
+        return r;
+    }
+    
     
     public void consultarCategorias(JComboBox cmbCat){
         sql = "select nombre from categoria where estado='Activo'";

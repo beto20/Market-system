@@ -29,6 +29,7 @@ public class VentasInternalFrm extends javax.swing.JInternalFrame {
     DefaultTableModel modelo = new DefaultTableModel();
     
     int idcliente;
+    int idproducto;
     double totalPagar;
     int cantidad;
     Double precio;
@@ -36,10 +37,9 @@ public class VentasInternalFrm extends javax.swing.JInternalFrame {
     
     public VentasInternalFrm() {
         initComponents();
-        Calendar calendario = new GregorianCalendar();
-        txtFecha.setText(""+calendario.get(Calendar.DAY_OF_MONTH)+"/"+calendario.get(Calendar.MONTH)+"/"+calendario.get(Calendar.YEAR));
-//        txtFecha.setText(""+calendario.get(Calendar.YEAR)+"/"+calendario.get(Calendar.MONTH)+"/"+calendario.get(Calendar.DAY_OF_MONTH));
         vdaoi.metodosPago(cmbModoPago);
+        fecha();
+        generarSerie();
     }
 
 
@@ -113,6 +113,8 @@ public class VentasInternalFrm extends javax.swing.JInternalFrame {
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 51, 255)));
+
+        txtPrecio.setEditable(false);
 
         txtCliente.setEditable(false);
 
@@ -288,6 +290,11 @@ public class VentasInternalFrm extends javax.swing.JInternalFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(204, 0, 51)));
 
         btnCancelar.setText("CANCELAR");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         btnEfectuar.setText("EFECTUAR VENTA");
         btnEfectuar.addActionListener(new java.awt.event.ActionListener() {
@@ -399,7 +406,8 @@ public class VentasInternalFrm extends javax.swing.JInternalFrame {
         double total = 0;
         modelo = (DefaultTableModel) tablaVenta.getModel();
         item = item + 1;
-        idcliente = c.getId();
+//        idcliente = c.getId();
+        idproducto = p.getId();
         String nombreProducto = txtProducto.getText();
         precio = Double.parseDouble(txtPrecio.getText());
         int stock = Integer.parseInt(txtStock.getText());
@@ -409,7 +417,7 @@ public class VentasInternalFrm extends javax.swing.JInternalFrame {
         ArrayList lista = new ArrayList();
         if (stock>0) {
             lista.add(item);
-            lista.add(idcliente);
+            lista.add(idproducto);
             lista.add(nombreProducto);
             lista.add(cantidad);
             lista.add(precio);
@@ -470,10 +478,55 @@ public class VentasInternalFrm extends javax.swing.JInternalFrame {
             d.setEstado("Activo");
             ddaoi.guardarDetalleVenta(d);
         }
-        
     }
     
+    public void fecha(){
+        Calendar calendario = new GregorianCalendar();
+        txtFecha.setText(""+calendario.get(Calendar.DAY_OF_MONTH)+"/"+calendario.get(Calendar.MONTH)+"/"+calendario.get(Calendar.YEAR));
+    }
     
+    public void generarSerie(){
+        String serie = vdaoi.IdVentas();
+        String c = "VNT00";
+        if (serie == null) {
+            txtNroFactura.setText(c);
+        }else{
+            int incrementar = Integer.parseInt(serie);
+            incrementar = incrementar + 1;
+            txtNroFactura.setText(c+incrementar);
+        }
+    }
+    
+    public void actualizarStock(){
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            idproducto = Integer.parseInt(tablaVenta.getValueAt(i, 1).toString());
+            cantidad = Integer.parseInt(tablaVenta.getValueAt(i, 3).toString());
+            p = pdaoi.listaProductoId(idproducto);
+            int stockactual = p.getStock() - cantidad;
+            pdaoi.actualizarStock(stockactual, idproducto);
+        }
+    }
+    
+    public void nuevo(){
+        txtCantidad.setText("");
+        txtCliente.setText("");
+        txtCodProducto.setText("");
+        txtDniCliente.setText("");
+        txtFecha.setText("");
+        txtNroFactura.setText("");
+        txtPrecio.setText("");
+        txtProducto.setText("");
+        txtStock.setText("");
+        txtTotal.setText("");
+        limpiarTabla();
+    }
+    
+    public void limpiarTabla(){
+        for (int i = 0; i < modelo.getRowCount(); i++) {
+            modelo.removeRow(i);
+            i=i-1;
+        }
+    }
     
     private void btnBuscarDniCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarDniCliActionPerformed
         buscarCliente();
@@ -488,9 +541,31 @@ public class VentasInternalFrm extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAgregarPrecioActionPerformed
 
     private void btnEfectuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEfectuarActionPerformed
-        guardarVenta();
-        guardarDetalle();
+        if (txtTotal.getText().equals("")) {
+            JOptionPane.showConfirmDialog(this,"Complete todos los campos");
+        }else{
+            guardarVenta();
+            guardarDetalle();
+            actualizarStock();
+            nuevo();
+            generarSerie();
+            fecha();
+            JOptionPane.showConfirmDialog(this,"Venta realizada");
+        }
+        
     }//GEN-LAST:event_btnEfectuarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        txtCantidad.setText("");
+        txtCliente.setText("");
+        txtCodProducto.setText("");
+        txtDniCliente.setText("");
+        txtPrecio.setText("");
+        txtProducto.setText("");
+        txtStock.setText("");
+        txtTotal.setText("");
+        limpiarTabla();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
