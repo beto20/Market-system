@@ -46,11 +46,23 @@ public class ModoPagoInternalFrm extends javax.swing.JInternalFrame {
 
         txtCodMod.setEditable(false);
 
+        txtTipMod.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTipModKeyTyped(evt);
+            }
+        });
+
         txtEstMod.setEditable(false);
 
         jLabel2.setText("ESTADO:");
 
         jLabel3.setText("DETALLES:");
+
+        txtDetMod.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDetModKeyTyped(evt);
+            }
+        });
 
         jLabel4.setText("TIPO:");
 
@@ -128,7 +140,7 @@ public class ModoPagoInternalFrm extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTipMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(txtDetMod, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDetMod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -299,6 +311,20 @@ public class ModoPagoInternalFrm extends javax.swing.JInternalFrame {
             txtEstMod.setText(tablaModoPago.getValueAt(fila, 3).toString());
         }
     }//GEN-LAST:event_tablaModoPagoMouseClicked
+
+    private void txtTipModKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipModKeyTyped
+        char c = evt.getKeyChar();
+        if ((c!=' ')&&(c<'a'||c>'z')&&(c<'A'||c>'Z')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTipModKeyTyped
+
+    private void txtDetModKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDetModKeyTyped
+        char c = evt.getKeyChar();
+        if ((c != ' ')&&(c<'a'||c>'z')&&(c<'A'||c>'Z')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDetModKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

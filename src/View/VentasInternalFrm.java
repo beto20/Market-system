@@ -9,12 +9,31 @@ import Model.Cliente;
 import Model.Detalle;
 import Model.Producto;
 import Model.Venta;
+
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 
 public class VentasInternalFrm extends javax.swing.JInternalFrame {
     Cliente c = new Cliente();
@@ -114,7 +133,30 @@ public class VentasInternalFrm extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(51, 51, 255)));
 
+        txtDniCliente.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDniClienteKeyTyped(evt);
+            }
+        });
+
+        txtCodProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodProductoKeyTyped(evt);
+            }
+        });
+
         txtPrecio.setEditable(false);
+        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioKeyTyped(evt);
+            }
+        });
+
+        txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadKeyTyped(evt);
+            }
+        });
 
         txtCliente.setEditable(false);
 
@@ -528,6 +570,140 @@ public class VentasInternalFrm extends javax.swing.JInternalFrame {
         }
     }
     
+    private void pdf(){
+        try {
+            FileOutputStream archivo;
+            File file = new File("src/Reportes/venta.pdf");
+            archivo = new FileOutputStream(file);
+            Document document = new Document();
+            PdfWriter.getInstance(document, archivo);
+            document.open();
+            
+            /*----------CEBECERA--------------*/
+            //LOGO Y RUTA
+            Image img = Image.getInstance("src/img/logo.PNG");
+            
+            //PARRAFO PARA FECHA
+            Paragraph fecha = new Paragraph();
+
+            Font colorLetra = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.MAGENTA);
+            fecha.add(Chunk.NEWLINE);
+            Date date = new Date();
+            fecha.add("Factura: "+txtNroFactura.getText()+"\n"+ "Fecha: "+new SimpleDateFormat("dd-MMMM-yyyy").format(date)+"\n\n");
+            
+            PdfPTable Encabezado = new PdfPTable(4);
+            Encabezado.setWidthPercentage(100);
+            Encabezado.getDefaultCell().setBorder(0);
+            float[] ColumnaEncabezado = new float[]{20f, 30f, 70f, 40f};
+            Encabezado.setWidths(ColumnaEncabezado);
+            Encabezado.setHorizontalAlignment(Element.ALIGN_LEFT);
+            
+            //PARRAFO CONTENIDO ENCABEZADO
+            Encabezado.addCell(img);
+            String rucEmp = "1234567890";
+            String nombreEmp = "AlfaSoft";
+            String lugarEmp = "Lima - Perú";
+            String telefonoEmp = "987654321";
+            String correoEmp = "a@soft.com";
+                        
+            //SETEAR CONTENIDO DE CABECERA
+            Encabezado.addCell("");
+            Encabezado.addCell("RUC: "+rucEmp+"\nNombre: "+nombreEmp+ "\nLugar: "+lugarEmp+ "\nTelefono: "+telefonoEmp+"\nCorreo: "+correoEmp);
+            Encabezado.addCell(fecha);
+            document.add(Encabezado);
+            /*------------------------------------*/
+            
+            /*---------------CUERPO DATOS------------*/
+            //PARRAFO DATOS CLIENTE
+            Paragraph cliente = new Paragraph();
+            cliente.add(Chunk.NEWLINE);
+            cliente.add("Datos de cliente: "+"\n\n");
+            document.add(cliente);
+            
+            PdfPTable tablaCliente = new PdfPTable(4);
+            tablaCliente.setWidthPercentage(100);
+            tablaCliente.getDefaultCell().setBorder(0);
+            float[] ColumnaCliente = new float[]{20f, 50f, 30f, 40f};
+            
+            tablaCliente.setWidths(ColumnaCliente);
+            tablaCliente.setHorizontalAlignment(Element.ALIGN_LEFT);
+            PdfPCell cli = new PdfPCell(new Phrase("DNI",colorLetra));
+            PdfPCell cli2 = new PdfPCell(new Phrase("Nombre",colorLetra));
+            PdfPCell cli3 = new PdfPCell(new Phrase("Correo",colorLetra));
+            PdfPCell cli4 = new PdfPCell(new Phrase("Direccion",colorLetra));
+            cli.setBorder(0);
+            cli2.setBorder(0);
+            cli3.setBorder(0);
+            cli4.setBorder(0);
+            tablaCliente.addCell(cli);
+            tablaCliente.addCell(cli2);
+            tablaCliente.addCell(cli3);
+            tablaCliente.addCell(cli4);
+            tablaCliente.addCell(txtDniCliente.getText());
+            tablaCliente.addCell(txtCliente.getText());
+            tablaCliente.addCell(c.getCorreo());
+            tablaCliente.addCell(c.getDireccion());
+            
+            document.add(tablaCliente);
+            
+             //PARRAFO DATOS PRODUTO
+            PdfPTable tablaProducto = new PdfPTable(4);
+            tablaProducto.setWidthPercentage(100);
+            tablaProducto.getDefaultCell().setBorder(0);
+            float[] ColumnaProducto = new float[]{10f, 50f, 15f, 20f};
+            tablaCliente.setWidths(ColumnaProducto);
+            tablaCliente.setHorizontalAlignment(Element.ALIGN_LEFT);
+            PdfPCell pro = new PdfPCell(new Phrase("Nombre",colorLetra));
+            PdfPCell pro2 = new PdfPCell(new Phrase("Cantidad",colorLetra));
+            PdfPCell pro3 = new PdfPCell(new Phrase("P. unitario",colorLetra));
+            PdfPCell pro4 = new PdfPCell(new Phrase("Total",colorLetra));
+            pro.setBorder(0);
+            pro2.setBorder(0);
+            pro3.setBorder(0);
+            pro4.setBorder(0);
+            tablaProducto.addCell(pro);
+            tablaProducto.addCell(pro2);
+            tablaProducto.addCell(pro3);
+            tablaProducto.addCell(pro4);
+            for (int i = 0; i < tablaVenta.getRowCount(); i++) {
+                String nombre = tablaVenta.getValueAt(i, 2).toString();
+                String cantidad = tablaVenta.getValueAt(i, 3).toString();
+                String punitario = tablaVenta.getValueAt(i, 4).toString();
+                String total = tablaVenta.getValueAt(i, 5).toString();
+                tablaProducto.addCell(nombre);
+                tablaProducto.addCell(cantidad);
+                tablaProducto.addCell(punitario);
+                tablaProducto.addCell(total);   
+            }
+            document.add(tablaProducto);
+            /*-----------------------------------------------*/
+            
+            /*------------------PIE DE PAGINA(EXTRAS)-----------------*/
+            Paragraph info = new Paragraph();
+            info.add(Chunk.NEWLINE);
+            info.add("Total a paga: "+txtTotal.getText());
+            info.setAlignment(Element.ALIGN_RIGHT);
+            document.add(info);
+            
+//            Paragraph firma = new Paragraph();
+//            firma.add(Chunk.NEWLINE);
+//            firma.add("Cancelacion y firma\n\n");
+//            firma.setAlignment(Element.ALIGN_CENTER);
+//            document.add(firma);
+//            
+            Paragraph mensaje = new Paragraph();
+            mensaje.add("Gracias por su compra");
+            mensaje.setAlignment(Element.ALIGN_CENTER);
+            document.add(mensaje);
+            /*-----------------------------------------------*/
+            document.close();
+            archivo.close();
+        } catch (DocumentException | IOException e) {
+            System.err.println("Error al importar PDF: "+e.getMessage());
+        }
+    }
+    
+    
     private void btnBuscarDniCliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarDniCliActionPerformed
         buscarCliente();
     }//GEN-LAST:event_btnBuscarDniCliActionPerformed
@@ -547,6 +723,7 @@ public class VentasInternalFrm extends javax.swing.JInternalFrame {
             guardarVenta();
             guardarDetalle();
             actualizarStock();
+            pdf();
             nuevo();
             generarSerie();
             fecha();
@@ -566,6 +743,31 @@ public class VentasInternalFrm extends javax.swing.JInternalFrame {
         txtTotal.setText("");
         limpiarTabla();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void txtDniClienteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDniClienteKeyTyped
+        char c = evt.getKeyChar();
+        if (c<'0'||c>'9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDniClienteKeyTyped
+
+    private void txtCodProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodProductoKeyTyped
+        char c = evt.getKeyChar();
+        if (c<'0'||c>'9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCodProductoKeyTyped
+
+    private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
+        
+    }//GEN-LAST:event_txtPrecioKeyTyped
+
+    private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
+        char c = evt.getKeyChar();
+        if(c<'0'||c>'9'){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCantidadKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

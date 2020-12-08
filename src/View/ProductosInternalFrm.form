@@ -206,10 +206,19 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNomPro">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNomProKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPrePro">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtPreProKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtStoPro">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtStoProKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtEstPro">
           <Properties>

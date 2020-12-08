@@ -56,6 +56,7 @@ create table detalle(
 )
 --INSERTAR 
 insert into cliente(nombre,apellidos,correo,dni,direccion,estado) values('Prueba','Java','Java@p.com','12345678','Lima-peru','Activo')
+insert into cliente(nombre,apellidos,correo,dni,direccion,estado) values('PruebaPHP','PHP','PHP@p.com','87654321','Lima-peru','Activo')
 insert into categoria(nombre,estado) values ('Abarrotes', 'Activo');
 insert into categoria(nombre,estado) values ('Carnes', 'Activo');
 insert into categoria(nombre,estado) values ('Verduras', 'Activo');
@@ -71,3 +72,11 @@ insert into producto(id_categoria,nombre,precio,stock,estado) values (4, 'Mandar
 insert into modo_pago(nombre,otros_detalles,estado) values ('Efectivo', 'solo se acepta moneda nacional','Activo');
 insert into factura(id_cliente,id_modo_pago,monto,fecha,estado) values (1, 1, 150.30,'8-11-2020','Activo')
 insert into detalle(id_factura,id_producto,cantidad,precio,estado) values (1, 1, 2,20.00,'Activo');
+
+--SELECT
+select * from cliente;
+select * from categoria;
+select * from producto;
+select * from modo_pago;
+select * from factura;
+select * from detalle;

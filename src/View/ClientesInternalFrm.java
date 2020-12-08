@@ -142,6 +142,24 @@ public class ClientesInternalFrm extends javax.swing.JInternalFrame {
             }
         });
 
+        txtApellidosCli.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellidosCliKeyTyped(evt);
+            }
+        });
+
+        txtNombreCli.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreCliKeyTyped(evt);
+            }
+        });
+
+        txtDniCli.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDniCliKeyTyped(evt);
+            }
+        });
+
         jLabel1.setText("NOMBRE:");
 
         jLabel2.setText("APELLIDOS:");
@@ -158,7 +176,19 @@ public class ClientesInternalFrm extends javax.swing.JInternalFrame {
 
         jLabel6.setText("CODIGO:");
 
+        txtDireccionCli.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDireccionCliKeyTyped(evt);
+            }
+        });
+
         jLabel7.setText("ESTADO:");
+
+        txtCorreoCli.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCorreoCliKeyTyped(evt);
+            }
+        });
 
         btnLimpiarCli.setText("Limpiar");
         btnLimpiarCli.addActionListener(new java.awt.event.ActionListener() {
@@ -346,6 +376,42 @@ public class ClientesInternalFrm extends javax.swing.JInternalFrame {
             txtEstadoCli.setText(tablaCliente.getValueAt(fila,6).toString());            
         }
     }//GEN-LAST:event_tablaClienteMouseClicked
+
+    private void txtNombreCliKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreCliKeyTyped
+        char c = evt.getKeyChar();
+        if (c!=' '&&(c<'a'||c>'z')&&(c<'A'||c>'Z')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreCliKeyTyped
+
+    private void txtApellidosCliKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosCliKeyTyped
+        char c = evt.getKeyChar();
+        if (c!=' '&&(c<'a'||c>'z')&&(c<'A'||c>'Z')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtApellidosCliKeyTyped
+
+    private void txtDniCliKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDniCliKeyTyped
+        char c = evt.getKeyChar();
+        
+        if ((c<'0'||c>'9')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDniCliKeyTyped
+
+    private void txtDireccionCliKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionCliKeyTyped
+        char c = evt.getKeyChar();
+        if (c!=' '&&(c<'a'||c>'z')&&(c<'A'||c>'Z')&&c!='.'&&(c<'0'||c>'9')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDireccionCliKeyTyped
+
+    private void txtCorreoCliKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoCliKeyTyped
+        char c = evt.getKeyChar();
+        if (c!='@'&&(c<'a'||c>'z')&&(c<'A'||c>'Z')&&c!='.'&&(c<'0'||c>'9')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCorreoCliKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizarCli;

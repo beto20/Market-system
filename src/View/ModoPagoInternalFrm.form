@@ -109,7 +109,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtTipMod" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtDetMod" alignment="3" min="-2" pref="63" max="-2" attributes="0"/>
+                      <Component id="txtDetMod" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="37" max="32767" attributes="0"/>
@@ -136,6 +136,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtTipMod">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtTipModKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txtEstMod">
           <Properties>
@@ -153,6 +156,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtDetMod">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtDetModKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>

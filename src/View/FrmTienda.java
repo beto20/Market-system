@@ -142,6 +142,8 @@ public class FrmTienda extends javax.swing.JFrame {
     private void jmCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCategoriasActionPerformed
         CategoriasInternalFrm cif = new CategoriasInternalFrm();
         Centrar(cif);
+//        CategoriasInternalFrm2 cif2 = new CategoriasInternalFrm2();
+//        Centrar(cif2);
     }//GEN-LAST:event_jmCategoriasActionPerformed
 
     private void jmenuModoPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmenuModoPagoActionPerformed

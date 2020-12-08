@@ -81,6 +81,17 @@ public class CategoriasInternalFrm extends javax.swing.JInternalFrame {
             }
         });
 
+        txtnombreCat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnombreCatActionPerformed(evt);
+            }
+        });
+        txtnombreCat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnombreCatKeyTyped(evt);
+            }
+        });
+
         txtestadoCat.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -240,6 +251,21 @@ public class CategoriasInternalFrm extends javax.swing.JInternalFrame {
             txtestadoCat.setText(estado);
         }
     }//GEN-LAST:event_jtablaCatMouseClicked
+
+    private void txtnombreCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnombreCatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnombreCatActionPerformed
+    //VALIDACION
+    private void txtnombreCatKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreCatKeyTyped
+//        char c = evt.getKeyChar();
+//        if (c<='0' || c<='9') {
+//            evt.consume();
+//        }
+        char c = evt.getKeyChar();
+        if ( (c != ' ')&&(c<'a'||c>'z')&&(c<'A'||c>'Z') ) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtnombreCatKeyTyped
     
     public void verTabla(){
         modelotabla = (DefaultTableModel) jtablaCat.getModel();
@@ -259,6 +285,8 @@ public class CategoriasInternalFrm extends javax.swing.JInternalFrame {
             i=i-1;
         }
     }
+    
+    
     public void agregar(){
         String nombre = txtnombreCat.getText();
         c.setNombre(nombre);
@@ -295,19 +323,19 @@ public class CategoriasInternalFrm extends javax.swing.JInternalFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnactualizarCat;
-    private javax.swing.JButton btnagregarCat;
-    private javax.swing.JButton btneliminarCat;
-    private javax.swing.JButton btnlimpiarCat;
+    public javax.swing.JButton btnactualizarCat;
+    public javax.swing.JButton btnagregarCat;
+    public javax.swing.JButton btneliminarCat;
+    public javax.swing.JButton btnlimpiarCat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtablaCat;
-    private javax.swing.JTextField txtcodigoCat;
-    private javax.swing.JTextField txtestadoCat;
-    private javax.swing.JTextField txtnombreCat;
+    public javax.swing.JTable jtablaCat;
+    public javax.swing.JTextField txtcodigoCat;
+    public javax.swing.JTextField txtestadoCat;
+    public javax.swing.JTextField txtnombreCat;
     // End of variables declaration//GEN-END:variables
 }

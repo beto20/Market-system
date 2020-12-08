@@ -62,6 +62,24 @@ public class ProductosInternalFrm extends javax.swing.JInternalFrame {
 
         txtCodPro.setEditable(false);
 
+        txtNomPro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNomProKeyTyped(evt);
+            }
+        });
+
+        txtPrePro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPreProKeyTyped(evt);
+            }
+        });
+
+        txtStoPro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtStoProKeyTyped(evt);
+            }
+        });
+
         txtEstPro.setEditable(false);
 
         btnAgregarPro.setText("AGREGAR");
@@ -344,6 +362,27 @@ public class ProductosInternalFrm extends javax.swing.JInternalFrame {
     private void btnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActionPerformed
         verTabla();
     }//GEN-LAST:event_btnVerActionPerformed
+
+    private void txtNomProKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomProKeyTyped
+        char c = evt.getKeyChar();
+        if ((c != ' ')&&(c<'a'||c>'z')&&(c<'A'||c>'Z')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNomProKeyTyped
+
+    private void txtStoProKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStoProKeyTyped
+        char c = evt.getKeyChar();
+        if (c<'0'||c>'9') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtStoProKeyTyped
+
+    private void txtPreProKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPreProKeyTyped
+        char c = evt.getKeyChar();
+        if (c!='.'&&(c<'0'||c>'9')) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPreProKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
