@@ -14,7 +14,7 @@ public class Conexion {
     private boolean cargarDriver(){
         try {
             Class.forName(driver);
-            System.out.println("Driver correcto");
+            System.out.println("Driver correcto de SQL SERVER");
             return true;
         } catch (ClassNotFoundException e) {
             System.err.println("Error, al cargar el driver "+e.getMessage());
@@ -28,7 +28,7 @@ public class Conexion {
         }
         try {
             Connection connection = DriverManager.getConnection(url, usuario, pssw);
-            System.out.println("Conexion exitosa");
+            System.out.println("Conexion exitosa de SQL SERVER");
             return connection;
         } catch (SQLException e) {
             System.err.println("Error de conexion");
