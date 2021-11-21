@@ -10,7 +10,7 @@ public class ConexionMySQL {
     private final String usuario = "root";
     private final String pssw = "";
     private final String url = "jdbc:mysql://localhost:3306/dbtienda";
-    private final String driver = "com.mysql.jdbc.Driver";
+    private final String driver = "com.mysql.cj.jdbc.Driver";
 
     private boolean cargarDriver(){
         try {
